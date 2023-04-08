@@ -1,11 +1,17 @@
-import './App.css';
 import { useState } from 'react';
 import { Select, Row, Col, Divider } from "antd"
+import { useTranslation } from 'react-i18next';
+import './App.css';
 
 function App() {
+  const { t, i18n } = useTranslation();
   const [test, setTest] = useState(false);
   const [position, setPosition] = useState(false);
   const [shapes, setShapes] = useState(["square", "circle", "oval", "trapezoid", "rectangle", "parallelogram"])
+
+  const changeLanguage = (lng: string) => {
+    i18n.changeLanguage(lng);
+  };
 
   const onChangePosition = () => {
     const newShapes = shapes.concat(shapes.splice(0, 3));
@@ -31,9 +37,13 @@ function App() {
         {test ? <div>Layout & Style</div> : null}
         <div className='translate'>
           <Select defaultValue="EN" options={[
-            { value: 'EN', label: 'EN' },
-            { value: 'TH', label: 'TH' },
-          ]} />
+            { value: 'en', label: `${t('EN')}` },
+            { value: 'th', label: `${t('TH')}` },
+          ]} onSelect={changeLanguage}/>
+          {/* <select onChange={(e: React.ChangeEvent<HTMLInputElement>) => changeLanguage(e)}>
+            <option value='en'>{t('EN')}</option>
+            <option value='th'>{t('TH')}</option>
+          </select> */}
         </div>
       </div>
       {test ? <div className='btn-container'>
@@ -92,16 +102,16 @@ function App() {
         </Row>
       </div> : <div className='test-container'>
         <div className='test-items' onClick={() => setTest(true)}>
-          <div>Test 1</div>
-          <div>Layout & Style</div>
+          <div>{t('Test')} 1</div>
+          <div>{t('Layout & Style')}</div>
         </div>
         <div className='test-items'>
-          <div>Test 2</div>
-          <div>Connect API</div>
+          <div>{t('Test')} 2</div>
+          <div>{t('Connect API')}</div>
         </div>
         <div className='test-items'>
-          <div>Test 3</div>
-          <div>Form & Table</div>
+          <div>{t('Test')} 3</div>
+          <div>{t('Form & Table')}</div>
         </div>
       </div>}
     </div>
