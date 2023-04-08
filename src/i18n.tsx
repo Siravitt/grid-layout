@@ -9,7 +9,9 @@ const resources = {
       "Connect API": "Connect API",
       "Form & Table": "Form & Table",
       "EN": "EN",
-      "TH": "TH"
+      "TH": "TH",
+      "Move position": "Move position",
+      "Move shape": "Move shape"
     }
   },
   th: {
@@ -19,7 +21,9 @@ const resources = {
       "Connect API": "การเชื่อมต่อ API",
       "Form & Table": "การจัดการหน้าฟอร์ม",
       "EN": "อังกฤษ",
-      "TH": "ไทย"
+      "TH": "ไทย",
+      "Move position": "เปลี่ยนตำแหน่ง",
+      "Move shape": "เลื่อนรูปแบบ"
     }
   }
 };

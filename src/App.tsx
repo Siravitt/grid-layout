@@ -1,13 +1,13 @@
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import { Select, Row, Col, Divider } from "antd"
 import { useTranslation } from 'react-i18next';
 import './App.css';
 
 function App() {
   const { t, i18n } = useTranslation();
-  const [test, setTest] = useState(false);
+  const [test, setTest] = useState<boolean>(false);
   const [position, setPosition] = useState(false);
-  const [shapes, setShapes] = useState(["square", "circle", "oval", "trapezoid", "rectangle", "parallelogram"])
+  const [shapes, setShapes] = useState<string[]>(["square", "circle", "oval", "trapezoid", "rectangle", "parallelogram"])
 
   const changeLanguage = (lng: string) => {
     i18n.changeLanguage(lng);
@@ -31,19 +31,30 @@ function App() {
     setShapes(newShapes);
   }
 
+  const randomClick = () => {
+    const newShapes = structuredClone(shapes);
+    newShapes.sort(() => Math.random() - 0.5);
+    setShapes(newShapes)
+  }
+
+  const handleSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    // console.log(e.target.value)
+    changeLanguage(e.target.value)
+  }
+
   return (
     <div className='container'>
       <div className='header'>
         {test ? <div>Layout & Style</div> : null}
         <div className='translate'>
-          <Select defaultValue="EN" options={[
+          {/* <Select defaultValue={t('EN')} options={[
             { value: 'en', label: `${t('EN')}` },
             { value: 'th', label: `${t('TH')}` },
-          ]} onSelect={changeLanguage}/>
-          {/* <select onChange={(e: React.ChangeEvent<HTMLInputElement>) => changeLanguage(e)}>
-            <option value='en'>{t('EN')}</option>
-            <option value='th'>{t('TH')}</option>
-          </select> */}
+          ]} onSelect={changeLanguage} /> */}
+          <select className='select' onChange={handleSelect}>
+            <option className='option' value='en'>{t('EN')}</option>
+            <option className='option' value='th'>{t('TH')}</option>
+          </select>
         </div>
       </div>
       {test ? <div className='btn-container'>
@@ -51,51 +62,54 @@ function App() {
           <Col span={6}>
             <div className='btn' onClick={onLeftClick}>
               <div className='triangle-left'></div>
+              <div className='title'>{t('Move shape')}</div>
             </div>
           </Col>
           <Col span={12}>
             <div className='btn-position' onClick={onChangePosition}>
               <div className='triangle-up'></div>
               <div className='triangle-down'></div>
+              <div className='title'>{t('Move position')}</div>
             </div>
           </Col>
           <Col span={6}>
             <div className='btn' onClick={onRightClick}>
               <div className='triangle-right'></div>
+              <div className='title'>{t('Move shape')}</div>
             </div>
           </Col>
         </Row>
         <Divider />
         <Row justify={`${position ? 'center' : 'end'}`} gutter={8}>
           <Col span={6}>
-            <div className='btn'>
+            <div className='btn' onClick={randomClick}>
               <div className={shapes[0]}></div>
             </div>
           </Col>
           <Col span={6}>
-            <div className='btn'>
+            <div className='btn' onClick={randomClick}>
               <div className={shapes[1]}></div>
             </div>
           </Col>
           <Col span={6}>
-            <div className='btn'>
+            <div className='btn' onClick={randomClick}>
               <div className={shapes[2]}></div>
             </div>
           </Col>
         </Row>
         <Row justify={`${position ? 'end' : 'center'}`} gutter={8}>
           <Col span={6}>
-            <div className='btn'>
+            <div className='btn' onClick={randomClick}>
               <div className={shapes[3]}></div>
             </div>
           </Col>
           <Col span={6}>
-            <div className='btn'>
+            <div className='btn' onClick={randomClick}>
               <div className={shapes[4]}></div>
             </div>
           </Col>
           <Col span={6}>
-            <div className='btn'>
+            <div className='btn' onClick={randomClick}>
               <div className={shapes[5]}></div>
             </div>
           </Col>

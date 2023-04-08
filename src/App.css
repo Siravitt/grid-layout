@@ -59,6 +59,7 @@
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  position: relative;
 }
 
 .btn-position {
@@ -152,5 +153,22 @@
 	background: #555;
 }
 
+.title {
+  position: absolute;
+  bottom: 0;
+  transform: translate(0,50%);
+  background-color: rgb(66, 244, 99);
+  color: white;
+  padding: 0 0.5rem;
+  border-radius: 10px;
+}
 
+.select {
+  position: relative;
+}
+
+.option {
+  position: absolute;
+  bottom: 0;
+}
 
