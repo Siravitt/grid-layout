@@ -6,7 +6,7 @@ import './App.css';
 function App() {
   const { t, i18n } = useTranslation();
   const [test, setTest] = useState<boolean>(false);
-  const [position, setPosition] = useState(false);
+  const [position, setPosition] = useState<boolean>(false);
   const [shapes, setShapes] = useState<string[]>(["square", "circle", "oval", "trapezoid", "rectangle", "parallelogram"])
 
   const changeLanguage = (lng: string) => {
